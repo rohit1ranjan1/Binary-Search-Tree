@@ -55,4 +55,7 @@ int main(){
 /*
 Enter number to be searched: 5
 Not in Tree!
+
+Enter number to be searched: 12
+Found 12
 */

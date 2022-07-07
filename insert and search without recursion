@@ -71,4 +71,7 @@ int main(){
 /*
 Enter number to be searched: 25
 Found 25
+
+Enter number to be searched: 2
+Not in Tree!
 */

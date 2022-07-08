@@ -64,3 +64,9 @@ int main(){
     insert(25);
     min_max();
 }
+
+/*
+Binary Search Tree Empty!
+Minimun valued element is: 1
+Maximun valued element is: 25
+*/

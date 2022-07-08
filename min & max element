@@ -1,0 +1,66 @@
+#include<iostream>
+using namespace std;
+struct bstnode{
+    int data;
+    bstnode* left;
+    bstnode* right;
+};
+bstnode* root=nullptr;
+bstnode* newNode(int data){
+    bstnode* node=new bstnode();
+    node->data=data;
+    node->left=node->right=nullptr;
+    return node;
+}
+void insert(int data){
+    if(root==nullptr){
+        root=newNode(data);
+        return;
+    }
+    bstnode* temp=root;
+    while(temp!=NULL){
+        if(data<=temp->data){
+            if(temp->left==nullptr){
+                temp->left=newNode(data);
+                return;
+            }
+            else
+            temp=temp->left;
+        }
+        else{
+            if(temp->right==nullptr){
+                temp->right=newNode(data);
+                return;
+            }
+            else
+            temp=temp->right;
+        }
+    }
+}
+void min_max(){
+    bstnode* temp=root;
+    
+    if(root==nullptr){
+    cout<<"Binary Search Tree Empty!";
+    return;
+    }
+    
+    while(temp->left!=nullptr)              //for min element
+    temp=temp->left;
+    cout<<"\nMinimun valued element is: "<<temp->data;
+    
+    temp=root;
+    while(temp->right!=nullptr)              //for max element
+    temp=temp->right;
+    cout<<"\nMaximun valued element is: "<<temp->data;
+}
+int main(){
+    min_max();
+    insert(15);
+    insert(10);
+    insert(1);
+    insert(20);
+    insert(12);
+    insert(25);
+    min_max();
+}

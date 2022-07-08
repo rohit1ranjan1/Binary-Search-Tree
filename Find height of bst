@@ -46,17 +46,17 @@ int findHeight(bstnode* temp){
     //when null is passed to the function findHeight, it returns 0.
 }
 int main(){
-    cout<<"Max height of tree is: "<<findHeight(root);
+    cout<<"Height of tree is: "<<findHeight(root);
     insert(15);
     insert(10);
     insert(1);
     insert(20);
     insert(12);
     insert(25);
-    cout<<"\nMax height of tree is: "<<findHeight(root);
+    cout<<"\nHeight of tree is: "<<findHeight(root);
 }
 
 /*
-Max height of tree is: -1
-Max height of tree is: 2
+Height of tree is: -1
+Height of tree is: 2
 */

@@ -43,16 +43,18 @@ void level_Order(){
     bstnode* current=root;
     q.push(current);
     cout<<"Breadth First traversal is:";
+    //while there's atleast one discovered node
     while(!q.empty()){
         current=q.front();
         cout<<"\n"<<current->data;
-        q.pop();
         
         if(current->left!=nullptr)
         q.push(current->left);
         
         if(current->right!=nullptr)
         q.push(current->right);
+        
+        q.pop();               //removing element at the front
     }
 }
 int main(){

@@ -1,0 +1,62 @@
+#include<iostream>
+using namespace std;
+struct bstnode{
+    int data;
+    bstnode* left;
+    bstnode* right;
+};
+bstnode* root=nullptr;
+bstnode* newNode(int data){
+    bstnode* node=new bstnode();
+    node->data=data;
+    node->left=node->right=nullptr;
+    return node;
+}
+void insert(int data){
+    if(root==nullptr){
+        root=newNode(data);
+        return;
+    }
+    bstnode* temp=root;
+    while(temp!=NULL){
+        if(data<=temp->data){
+            if(temp->left==nullptr){
+                temp->left=newNode(data);
+                return;
+            }
+            else
+            temp=temp->left;
+        }
+        else{
+            if(temp->right==nullptr){
+                temp->right=newNode(data);
+                return;
+            }
+            else
+            temp=temp->right;
+        }
+    }
+}
+int findHeight(bstnode* temp){
+    if(temp==nullptr)
+    return -1;
+    
+    else
+    return max(findHeight(temp->left),findHeight(temp->right)+1);
+    //when null is passed to the function findHeight, it returns 0.
+}
+int main(){
+    cout<<"Max height of tree is: "<<findHeight(root);
+    insert(15);
+    insert(10);
+    insert(1);
+    insert(20);
+    insert(12);
+    insert(25);
+    cout<<"\nMax height of tree is: "<<findHeight(root);
+}
+
+/*
+Max height of tree is: -1
+Max height of tree is: 2
+*/

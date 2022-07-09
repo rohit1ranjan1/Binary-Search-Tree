@@ -70,11 +70,41 @@ int main(){
     insert(15);
     insert(10);
     insert(20);
+    insert(8);
     insert(12);
     insert(25);
+    insert(17);
+    insert(19);
+    insert(18);
+    insert(1);
+    insert(9);
     preorder_Traveral();  
 }
 
 /*
+int main(){
+    insert(15);
+    insert(10);
+    insert(20);
+    insert(12);
+    insert(25);
+    preorder_Traveral();  
+}
 Preorder Traveral of BST is: 15 10 12 20 25
+
+int main(){
+    insert(15);
+    insert(10);
+    insert(20);
+    insert(8);
+    insert(12);
+    insert(25);
+    insert(17);
+    insert(19);
+    insert(18);
+    insert(1);
+    insert(9);
+    preorder_Traveral();  
+}
+Preorder Traveral of BST is: 15 10 8 1 9 12 20 17 19 18 25
 */

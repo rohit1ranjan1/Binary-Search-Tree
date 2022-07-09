@@ -1,0 +1,80 @@
+#include<iostream>
+#include<stack>
+using namespace std;
+struct bstnode{
+    int data;
+    bstnode* left;
+    bstnode* right;
+};
+bstnode* root=nullptr;
+bstnode* newNode(int data){
+    bstnode* node=new bstnode();
+    node->data=data;
+    node->left=node->right=nullptr;
+    return node;
+}
+void insert(int data){
+    if(root==nullptr){
+        root=newNode(data);
+        return;
+    }
+    bstnode* temp=root;
+    while(temp!=NULL){
+        if(data<=temp->data){
+            if(temp->left==nullptr){
+                temp->left=newNode(data);
+                return;
+            }
+            else
+            temp=temp->left;
+        }
+        else{
+            if(temp->right==nullptr){
+                temp->right=newNode(data);
+                return;
+            }
+            else
+            temp=temp->right;
+        }
+    }
+}
+void preorder_Traveral(){
+    stack<bstnode*> s;
+    bstnode* temp=root;
+    cout<<"Preorder Traveral of BST is: "<<temp->data;
+    s.push(temp);
+    while(temp->left!=nullptr){
+        temp=temp->left;
+        cout<<" "<<temp->data;
+        s.push(temp);
+    }
+    while(!s.empty()){
+        temp=s.top();
+        if((temp->left==nullptr && temp->right==nullptr) || (temp->right==nullptr))
+        s.pop();
+        
+        else if(temp->right!=nullptr){
+            s.pop();
+            temp=temp->right;
+            cout<<" "<<temp->data;
+            s.push(temp);
+            while(temp->left!=nullptr){
+                temp=temp->left;
+                cout<<" "<<temp->data;
+                s.push(temp);
+            }
+        }
+    }
+}
+int main(){
+    insert(15);
+    insert(10);
+    insert(20);
+    insert(12);
+    insert(25);
+    preorder_Traveral();  
+}
+
+/*
+Preorder Traveral of BST is: 15 10 12 20 25
+*/

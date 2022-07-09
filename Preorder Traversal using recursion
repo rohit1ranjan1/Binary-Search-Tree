@@ -1,0 +1,48 @@
+#include<iostream>
+using namespace std;
+struct bstnode{
+    int data;
+    bstnode* left;
+    bstnode* right;
+};
+bstnode* getnewnode(int data){
+    bstnode* node=new bstnode();
+    node->data=data;
+    node->left=node->right=nullptr;
+    return node;
+}
+bstnode* insert(bstnode* root, int data){
+    if(root==nullptr)
+    root=getnewnode(data);
+    
+    else if(data<=(root->data))
+    root->left=insert(root->left,data);
+    
+    else
+    root->right=insert(root->right,data);
+    
+    return root;
+}
+void preorder_traversal(bstnode* root){
+    if(root==nullptr)
+    return;
+    cout<<" "<<root->data;
+    
+    preorder_traversal(root->left);
+    preorder_traversal(root->right);
+    
+}
+int main(){
+    bstnode* root=nullptr;
+    root=insert(root,15);
+    root=insert(root,10);
+    root=insert(root,20);
+    root=insert(root,12);
+    root=insert(root,25);
+    cout<<"Preorder traversal of BST is: ";
+    preorder_traversal(root);
+}    
+
+/*
+Preorder traversal of BST is:  15 10 12 20 25
+*/

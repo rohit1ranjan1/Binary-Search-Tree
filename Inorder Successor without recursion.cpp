@@ -38,34 +38,7 @@ void insert(int data){
         }
     }
 }
-void preorder_Traveral(){
-    stack<bstnode*> s;
-    bstnode* temp=root;
-    cout<<"\nPreorder Traveral of BST is: "<<temp->data;
-    s.push(temp);
-    while(temp->left!=nullptr){
-        temp=temp->left;
-        cout<<" "<<temp->data;
-        s.push(temp);
-    }
-    while(!s.empty()){
-        temp=s.top();
-        if((temp->left==nullptr && temp->right==nullptr) || (temp->right==nullptr))
-        s.pop();
-        
-        else if(temp->right!=nullptr){
-            s.pop();
-            temp=temp->right;
-            cout<<" "<<temp->data;
-            s.push(temp);
-            while(temp->left!=nullptr){
-                temp=temp->left;
-                cout<<" "<<temp->data;
-                s.push(temp);
-            }
-        }
-    }
-}
+
 void inOrder()
 {
     stack<bstnode *> s;
@@ -99,33 +72,44 @@ void inOrder()
     } /* end of while */
 }
 void inorderSuccessor(int num){
-    stack<bstnode*> s;
     bstnode* temp=root;
-    bstnode* curr;
+    bstnode* prev;
     if(num<temp->data){
         while(num<temp->data){
-            s.push(temp);
+            prev=temp;
             temp=temp->left;
         }
-            curr=s.top();
-            cout<<"\nInorder Successor is: "<<curr->data;
+        if(temp->right==nullptr){
+            cout<<"\n"<<prev->data;
+        }
+        else{
+            temp=temp->right;
+            while(temp->left!=nullptr){
+                temp=temp->left;
+            }
+            cout<<"\n"<<temp->data;
+        }
+            
     }
     else{
-        while(num>=temp->data)
-        temp=temp->right;
-        
-         if(num<temp->data){
-        while(num<temp->data){
-            s.push(temp);
+        while(num>temp->data){
+            prev=temp;
+            temp=temp->right;
+        }
+        if(num<temp->data){
+            while(num<temp->data){
+            prev=temp;
             temp=temp->left;
         }
-            curr=s.top();
-            cout<<"\nInorder Successor is: "<<curr->data;
-    }
-        while(temp->left!=nullptr)
+        if(temp->right==nullptr)
+         cout<<"\n"<<prev->data;
+        else{
+            temp=temp->right;
+            while(temp->left!=nullptr)
             temp=temp->left;
-            
-        cout<<"\nInorder Successor is: "<<temp->data;
+            cout<<"\n"<<temp->data;
+        }
+        }
     }
     
 }
@@ -141,13 +125,10 @@ int main(){
     insert(18);
     insert(1);
     insert(9);
-    preorder_Traveral();  
     inOrder();
-    inorderSuccessor(8);
+    inorderSuccessor(17);
 }
-
 /*
-Preorder Traveral of BST is: 15 10 8 1 9 12 20 17 19 18 25
 Inorder Traversal:1 8 9 10 12 15 17 18 19 20 25 
-Inorder Successor is: 10
+18
 */

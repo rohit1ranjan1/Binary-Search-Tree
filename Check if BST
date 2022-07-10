@@ -1,0 +1,52 @@
+#include<iostream>
+using namespace std;
+struct bstnode{
+    int data;
+    bstnode* left;
+    bstnode* right;
+};
+bstnode* getnewnode(int data){
+    bstnode* node=new bstnode();
+    node->data=data;
+    node->left=node->right=nullptr;
+    return node;
+}
+bstnode* insert(bstnode* root, int data){
+    if(root==nullptr)
+    root=getnewnode(data);
+    
+    else if(data<=(root->data))
+    root->left=insert(root->left,data);
+    
+    else
+    root->right=insert(root->right,data);
+    
+    return root;
+}
+bool checkBST(bstnode* root, int minValue, int maxValue){
+    if(root==nullptr)
+    return true;
+    
+    else if((root->data>minValue && root->data<maxValue) && checkBST(root->left,minValue, root->data) && checkBST(root->right,root->data,maxValue))
+    return true;
+    
+    else
+    return false;
+}
+int main(){
+    bstnode* root=nullptr;
+    root=insert(root,15);
+    root=insert(root,10);
+    root=insert(root,20);
+    root=insert(root,12);
+    root=insert(root,25);
+    checkBST(root,10,25);
+    if(checkBST)
+    cout<<"The binary tree is BST..";
+    else
+    cout<<"The binary tree is not BST!";
+}    
+
+/*
+The binary tree is BST..
+*/

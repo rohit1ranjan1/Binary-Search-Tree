@@ -69,32 +69,55 @@ void preorder_Traveral(){
 void deleteNode(int num){
     bstnode* temp=root;
     bstnode* prev;
+    
+    if(temp==nullptr){
+            cout<<"\nNode not in tree!";
+            return;
+        }
+        
     while(temp!=nullptr){
         if(temp==nullptr){
             cout<<"\nNode not in tree!";
             return;
         }
         else if(num==temp->data){
-            if(temp->left!=nullptr && temp->right!=nullptr){
+            if(temp->left!=nullptr && temp->right!=nullptr){       //case 3:Two children
                 bstnode* current=temp;
+                prev=temp;
                 temp=temp->right;
-                while(temp->left!=nullptr)
+                while(temp->left!=nullptr){
+                    current=temp;
                     temp=temp->left;
-                
-                prev->right=temp;
-                current->data=temp->data;
-                temp->left=current->left;
-                temp->right=current->right;
+                }
+                prev->data=temp->data;
             }
             
-            else if(temp->right!=nullptr)
-                prev->left=temp->right;
+            else if(temp->right==nullptr && temp->left==nullptr){  //case 1: No child
+                if(temp->data<prev->data)
+                prev->left==nullptr;
+                else
+                prev->right==nullptr;
+            }
             
-            else if(temp->left!=nullptr)
-            prev->right=temp->left;
+             if (temp->left == NULL || temp->right == NULL) {
+                         bstnode* newCurr;  //case 2: One child
+ 
+        // if the left child does not exist.
+        if (temp->left == NULL)
+            newCurr = temp->right;
+        else
+            newCurr = temp->left;
+                 
+        if (temp == prev->left)
+            prev->left = newCurr;
+        else
+            prev->right = newCurr;
+    }
             
+            delete temp;
+            temp=nullptr;
             cout<<"\nNode deleted...";
-            free(temp);
+            
         }
         else if(num<temp->data){
             prev=temp;
@@ -110,14 +133,35 @@ int main(){
     insert(15);
     insert(10);
     insert(20);
+    insert(8);
+    insert(12);
+    insert(25);
+    insert(17);
+    insert(19);
+    insert(18);
+    insert(1);
+    insert(9);
+    preorder_Traveral();  
+    deleteNode(20);
+    preorder_Traveral(); 
+}
+
+
+/*
+Preorder Traveral of BST is: 15 10 8 1 9 12 20 17 19 18 25
+Node deleted...
+Preorder Traveral of BST is: 15 10 8 1 9 12 25 17 19 18
+
+int main(){
+    insert(15);
+    insert(10);
+    insert(20);
     insert(12);
     insert(25);
     preorder_Traveral();  
     deleteNode(10);
     preorder_Traveral(); 
 }
-
-/*
 Preorder Traveral of BST is: 15 10 12 20 25
 Node deleted...
 Preorder Traveral of BST is: 15 12 20 25

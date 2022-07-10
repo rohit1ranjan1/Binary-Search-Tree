@@ -73,13 +73,19 @@ void inOrder()
 }
 void inorderSuccessor(int num){
     bstnode* temp=root;
+    stack<bstnode*> s;
     bstnode* prev;
     if(num<temp->data){
         while(num<temp->data){
-            prev=temp;
+            s.push(temp);
             temp=temp->left;
         }
-        if(temp->right==nullptr){
+        if(num>temp->data){
+            prev=s.top();
+            cout<<"\n"<<prev->data;
+        }
+        else if(temp->right==nullptr){
+            prev=s.top();
             cout<<"\n"<<prev->data;
         }
         else{
@@ -93,23 +99,30 @@ void inorderSuccessor(int num){
     }
     else{
         while(num>temp->data){
-            prev=temp;
             temp=temp->right;
         }
-        if(num<temp->data){
-            while(num<temp->data){
-            prev=temp;
+        
+        while(num<temp->data){
+            s.push(temp);
             temp=temp->left;
         }
-        if(temp->right==nullptr)
-         cout<<"\n"<<prev->data;
+        
+        if(num>temp->data){
+            prev=s.top();
+            cout<<"\n"<<prev->data;
+        }
+        else if(temp->right==nullptr){
+            prev=s.top();
+            cout<<"\n"<<prev->data;
+        }
         else{
             temp=temp->right;
-            while(temp->left!=nullptr)
-            temp=temp->left;
+            while(temp->left!=nullptr){
+                temp=temp->left;
+            }
             cout<<"\n"<<temp->data;
         }
-        }
+        
     }
     
 }
